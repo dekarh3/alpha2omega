@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyqt5-sip = "==12.13.0"
+pyqtdeploy = "==3.3.0"
+sip = "==6.7.12"
+pyqt-builder = "==1.15.3"
+pipdeptree = "==2.18.1"
+pyqt5 = "==5.15.10"
+pyqt5-qt5 = "==5.15.2"
+setuptools = "==69.2.0"
+
+[dev-packages]
+
