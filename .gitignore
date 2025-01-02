@@ -1,4 +1,4 @@
 utils
-src/build-android-64
-src/releases
-src/sysroot-android-64
+build-android-64
+releases
+sysroot-android-64
