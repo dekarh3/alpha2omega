@@ -22,13 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Operational pyqt5 app with database
-
-# Inspiration from Tutorials Point at https://www.tutorialspoint.com/pyqt5/pyqt5_database_handling.htm
-# And from Leodanis Pozo Ramos at https://realpython.com/python-pyqt-database/
-
-## Imports
-
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMessageBox, QTableView
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery
@@ -58,7 +51,7 @@ class DbManager():
             except Exception as error:
                 logger.exception("DbManager::__init__ - Error: Connection not established - " + str(error))
             else:
-                logger.info("DbManager::__init__ - Connection established for "
+                logger.debug("DbManager::__init__ - Connection established for "
                         + str(self.db_name)
                         + " of type "
                         + str(self.db_type)
@@ -70,7 +63,7 @@ class DbManager():
         if not os.path.exists(os.path.join(self.db_folder, self.db_name)):
             self.create_db()
 
-        logger.info("DbManager::__init__ - Database Manager for "
+        logger.debug("DbManager::__init__ - Database Manager for "
                 + str(os.path.join(self.db_folder, self.db_name))
                 + " instantiated"
                 )
@@ -80,7 +73,7 @@ class DbManager():
     def __del__(self):
         logger.debug("DbManager::__del__ - Entered method")
         self.db_connected.close()
-        logger.info("DbManager::__del__ - Database Manager for "
+        logger.debug("DbManager::__del__ - Database Manager for "
                 + str(os.path.join(self.db_folder, self.db_name))
                 + " deleted"
                 )

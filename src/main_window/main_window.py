@@ -22,25 +22,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Operational pyqt5 app with database
-
-# Inspiration from Tutorials Point at https://www.tutorialspoint.com/pyqt5/pyqt5_database_handling.htm
-# And from Leodanis Pozo Ramos at https://realpython.com/python-pyqt-database/
-
-## Imports
-
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QMessageBox, QDialog, QVBoxLayout, QWidget, QSizePolicy
 from PyQt5.QtSql import QSqlTableModel
 
 from src.db_manager import DbManager
 from src.logger import logger, app_folder
 
-## Main variables and objects
-
-
-## Class definition
-
-# Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -82,7 +69,7 @@ class MainWindow(QMainWindow):
     def on_button_clicked(self):
         
         logger.debug("MainWindow::on_button_clicked - Entered method")
-        logger.info("MainWindow::on_button_clicked - Button has been clicked")
+        logger.debug("MainWindow::on_button_clicked - Button has been clicked")
 
         # Create alert window message
         alert = QMessageBox()
