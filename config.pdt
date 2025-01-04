@@ -4,7 +4,7 @@ sysroots_dir = ""
 parts = [ "PyQt:PyQt5.QtWidgets", "PyQt:PyQt5.QtSql", "Python:logging",]
 
 [Application]
-entry_point = "src.operational_pyqt5_app_with_database:main"
+entry_point = "src.main:main"
 is_console = false
 is_bundle = false
 name = "DatabaseManagementApp"
@@ -21,7 +21,37 @@ included = true
 is_directory = false
 
 [[Application.Package.Content]]
-name = "operational_pyqt5_app_with_database.py"
+name = "constants.py"
 included = true
 is_directory = false
+
+[[Application.Package.Content]]
+name = "db_manager.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content]]
+name = "logger.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content]]
+name = "main.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content]]
+name = "main_window"
+included = true
+is_directory = true
+[[Application.Package.Content.Content]]
+name = "__init__.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "main_window.py"
+included = true
+is_directory = false
+
 
