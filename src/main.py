@@ -27,7 +27,7 @@ from PyQt5.QtWidgets import QApplication
 import sys
 
 from src.logger import logger, logger_output_file_path
-from src.main_window.main_window import MainWindow
+from src.ThemeTable.ThemeTable import ThemeTable
 
 def main():
     # Define path reference: app folder is the reference for the device
@@ -37,8 +37,8 @@ def main():
 
     app = QApplication(sys.argv)
 
-    main_window = MainWindow()
-    main_window.show()
+    theme_table = ThemeTable()
+    theme_table.show()
 
     logger.debug("main - App started")
     sys.exit(app.exec())
