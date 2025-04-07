@@ -1,27 +1,3 @@
-#!/usr/bin/env python3
-
-# MIT License
-
-# Copyright (c) 2023-2024 Achille MARTIN
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMessageBox, QTableView
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery
@@ -30,14 +6,11 @@ from src.logger import logger
 
 import os
 
-# Database Manager class
 class DbManager():
 
-    # Ensure one connection to a database per application
     db_connected = None
 
     def __init__(self, db_type, db_name, db_folder):
-
         self.db_type = db_type
         # Include the extension in the name (e.g. `test.db`)
         self.db_name = db_name
@@ -59,7 +32,6 @@ class DbManager():
                         + str(os.path.join(self.db_folder, self.db_name))
                         )
 
-        # Initial database creation
         if not os.path.exists(os.path.join(self.db_folder, self.db_name)):
             self.create_db()
 
