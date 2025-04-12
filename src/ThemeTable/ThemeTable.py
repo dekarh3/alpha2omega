@@ -3,14 +3,13 @@ from PyQt5.uic import loadUiType
 
 from io import StringIO
 
-from src.DbManager import DbManager
-from src.logger import logger, app_folder
+# from src.main import table_model, db_manager
 from src.uis import ThemeTable_ui
 
 ThemeTable_form, ThemeTable_base = loadUiType(StringIO(ThemeTable_ui))
 
 class ThemeTable(ThemeTable_form, ThemeTable_base):
-    def __init__(self):
+    def __init__(self, table_model, db_manager, logger):
         logger.debug("ThemeTable::__init__ - Entered method")
         logger.debug("Definition:: widget_main_window_ui created")
         super(ThemeTable_base, self).__init__()
@@ -19,9 +18,7 @@ class ThemeTable(ThemeTable_form, ThemeTable_base):
         self.setWindowTitle("ThemeTable - Example simple pyqt5 app")
 
         # Instantiate the database manager
-        db_manager = DbManager('QSQLITE', 'sportsdatabase.db', app_folder)
-        table_model = QSqlTableModel()
-        db_manager.initialise_model(table_model)
+        # db_manager = DbManager('QSQLITE', 'sportsdatabase.db', app_folder)
 
         # view_primary = db_manager.create_view("Table Model (View Primary)", table_model)
         self.view_primary.setModel(table_model)

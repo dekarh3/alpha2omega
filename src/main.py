@@ -23,10 +23,12 @@
 # SOFTWARE.
 
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtSql import QSqlTableModel
 
 import sys
 
-from src.logger import logger, logger_output_file_path
+from src.logger import logger, logger_output_file_path, app_folder
+from src.DbManager import DbManager
 from src.ThemeTable.ThemeTable import ThemeTable
 
 def main():
@@ -35,15 +37,20 @@ def main():
     logger.debug("main - logger instantiated")
     logger.debug("main - Log output file can be found at: " + str(logger_output_file_path))
 
+
     app = QApplication(sys.argv)
 
-    theme_table = ThemeTable()
+    db_manager = DbManager('QSQLITE', 'sportsdatabase.db', app_folder, logger) #, app_folder)
+    table_model = QSqlTableModel()
+    db_manager.initialise_model(table_model)
+
+    theme_table = ThemeTable(table_model, db_manager, logger)
     theme_table.show()
 
     logger.debug("main - App started")
     sys.exit(app.exec())
-    logger.debug("main - App terminated")
-    logger.debug("main - Exited function")
+    #logger.debug("main - App terminated")
+    #logger.debug("main - Exited function")
 
 if __name__ == "__main__":
     sys.exit(main())
