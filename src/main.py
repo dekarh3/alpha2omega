@@ -40,7 +40,7 @@ def main():
 
     app = QApplication(sys.argv)
 
-    db_manager = DbManager('QSQLITE', 'sportsdatabase.db', app_folder, logger) #, app_folder)
+    db_manager = DbManager('QSQLITE', 'alpa2omega.db', app_folder, logger) #, app_folder)
     table_model = QSqlTableModel()
     db_manager.initialise_model(table_model)
 

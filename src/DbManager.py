@@ -5,6 +5,16 @@ from PyQt5.QtSql import QSqlDatabase, QSqlTableModel, QSqlQuery
 # from src.logger import logger, app_folder
 
 import os
+try:
+    from src.hide import SOULS, THEMES, UNIT_TYPES, NOTES, SUBJECTS, MEASURES, REFS
+except ImportError:
+    SOULS = []
+    THEMES = []
+    UNIT_TYPES = []
+    NOTES = []
+    SUBJECTS = []
+    MEASURES = []
+    REFS = []
 
 class DbManager():
 
@@ -64,13 +74,114 @@ class DbManager():
           return False
 
         query = QSqlQuery()
-        query.exec_("create table tennismen(id int primary key, ""firstname varchar(20), lastname varchar(20))")
+        query.exec_(
+            'CREATE TABLE "souls" ('
+                '"id"           INTEGER NOT NULL UNIQUE,'
+                '"name"         TEXT NOT NULL,'
+                '"about"        TEXT,'
+                'PRIMARY KEY('
+                    '"id"       AUTOINCREMENT'
+                ')'
+            ')'
+        )
+        for soul in SOULS:
+            query.exec_(soul)
 
-        query.exec_("insert into tennismen values(101, 'Andre', 'Agassi')")
-        query.exec_("insert into tennismen values(102, 'Novak', 'Djokovic')")
-        query.exec_("insert into tennismen values(103, 'Daniil', 'Medvedev')")
-        query.exec_("insert into tennismen values(104, 'Andy', 'Murray')")
-        query.exec_("insert into tennismen values(105, 'Rafael', 'Nadal')")
+        query.exec_(
+            'CREATE TABLE "themes" ('
+                '"id"           INTEGER NOT NULL UNIQUE,'
+                '"name"         TEXT NOT NULL,'
+                '"about"        TEXT,'
+                '"nameIndex"    INTEGER NOT NULL, '
+                '"date"         TEXT NOT NULL,'
+                'PRIMARY KEY('
+                    '"id"       AUTOINCREMENT'
+                ')'
+            ')'
+        )
+        for theme in THEMES:
+            query.exec_(theme)
+
+        query.exec_(
+            'CREATE TABLE "unitTypes" ('
+                '"id"	        INTEGER NOT NULL UNIQUE,'
+                '"name"	        TEXT NOT NULL,'
+                'PRIMARY KEY('
+                    '"id"       AUTOINCREMENT'
+                ')'
+            ')'
+        )
+        for unit_type in UNIT_TYPES:
+            query.exec_(unit_type)
+
+        query.exec_(
+            'CREATE TABLE "notes" ('
+                '"id"	        INTEGER NOT NULL UNIQUE,'
+                '"name"	        TEXT NOT NULL,'
+                '"about"        TEXT,'
+                '"nameIndex"	INTEGER NOT NULL,'
+                '"date"	        TEXT NOT NULL,'
+                'PRIMARY KEY('
+                    '"id"       AUTOINCREMENT'
+                ')'
+            ')'
+        )
+        for note in NOTES:
+            query.exec_(note)
+
+        query.exec_(
+            'CREATE TABLE "subjects" ('
+                '"id"	        INTEGER NOT NULL UNIQUE,'
+                '"name"	        TEXT NOT NULL,'
+                '"about"	    TEXT,'
+                'PRIMARY KEY('
+                    '"id"       AUTOINCREMENT'
+                ')'
+            ')'
+        )
+        for subject in SUBJECTS:
+            query.exec_(subject)
+
+        query.exec_(
+            'CREATE TABLE "measures" ('
+                '"id"	        INTEGER NOT NULL UNIQUE,'
+                '"soulId"	    INTEGER NOT NULL,'
+                '"themeId"	    INTEGER NOT NULL,'
+                '"date"	        TEXT,'
+                '"value"	    REAL NOT NULL,'
+                '"unitTypeId"	INTEGER NOT NULL,'
+                '"sign"	        INTEGER NOT NULL,'
+                'PRIMARY KEY('
+                    '"id"       AUTOINCREMENT'
+                '),'
+                'FOREIGN KEY("soulId") REFERENCES "souls"("id"),'
+                'FOREIGN KEY("themeId") REFERENCES "themes"("id"),'
+                'FOREIGN KEY("unitTypeId") REFERENCES "unitTypes"("id")'
+            ')'
+        )
+        for measure in MEASURES:
+            query.exec_(measure)
+
+        query.exec_(
+            'CREATE TABLE "refs" ('
+                '"id"           INTEGER NOT NULL UNIQUE,'
+                '"subjectId"	INTEGER NOT NULL,'
+                '"noteId"	    INTEGER NOT NULL,'
+                '"date"	        TEXT,'
+                '"value"	    REAL NOT NULL,'
+                '"unitTypeId"	INTEGER NOT NULL,'
+                '"sign"	        INTEGER NOT NULL,'
+                'PRIMARY KEY('
+                    '"id"       AUTOINCREMENT'
+                '),'
+                'FOREIGN KEY("subjectId") REFERENCES "subjects"("id"),'
+                'FOREIGN KEY("unitTypeId") REFERENCES "unitTypes"("id"),'
+                'FOREIGN KEY("noteId") REFERENCES "notes"("id")'
+            ')'
+        )
+        for ref in REFS:
+            query.exec_(ref)
+
         self.logger.debug("DbManager::create_db - Created table of tennismen with initial values")
         self.logger.debug("DbManager::create_db - Exited method")
         return True

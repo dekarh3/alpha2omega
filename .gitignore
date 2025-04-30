@@ -2,3 +2,4 @@ utils
 build-android-64
 releases
 sysroot-android-64
+src/hide.py
