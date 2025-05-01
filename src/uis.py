@@ -6,8 +6,8 @@ ThemeTable_ui = '''<?xml version="1.0" encoding="UTF-8"?>
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>445</height>
+    <width>387</width>
+    <height>587</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@ ThemeTable_ui = '''<?xml version="1.0" encoding="UTF-8"?>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTableView" name="view_primary"/>
+    <widget class="QTableView" name="tv_measures"/>
    </item>
    <item>
     <widget class="QPushButton" name="button_add_row">
@@ -37,6 +37,15 @@ ThemeTable_ui = '''<?xml version="1.0" encoding="UTF-8"?>
       <string>Done</string>
      </property>
     </widget>
+   </item>
+   <item>
+    <widget class="QTableView" name="tv_souls"/>
+   </item>
+   <item>
+    <widget class="QTableView" name="tv_themes"/>
+   </item>
+   <item>
+    <widget class="QTableView" name="tv_unit_types"/>
    </item>
   </layout>
  </widget>

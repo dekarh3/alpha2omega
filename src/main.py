@@ -41,10 +41,8 @@ def main():
     app = QApplication(sys.argv)
 
     db_manager = DbManager('QSQLITE', 'alpa2omega.db', app_folder, logger) #, app_folder)
-    table_model = QSqlTableModel()
-    db_manager.initialise_model(table_model)
 
-    theme_table = ThemeTable(table_model, db_manager, logger)
+    theme_table = ThemeTable(db_manager, logger)
     theme_table.show()
 
     logger.debug("main - App started")

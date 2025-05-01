@@ -9,7 +9,7 @@ from src.uis import ThemeTable_ui
 ThemeTable_form, ThemeTable_base = loadUiType(StringIO(ThemeTable_ui))
 
 class ThemeTable(ThemeTable_form, ThemeTable_base):
-    def __init__(self, table_model, db_manager, logger):
+    def __init__(self, db_manager, logger):
         logger.debug("ThemeTable::__init__ - Entered method")
         logger.debug("Definition:: widget_main_window_ui created")
         super(ThemeTable_base, self).__init__()
@@ -21,8 +21,11 @@ class ThemeTable(ThemeTable_form, ThemeTable_base):
         # db_manager = DbManager('QSQLITE', 'sportsdatabase.db', app_folder)
 
         # view_primary = db_manager.create_view("Table Model (View Primary)", table_model)
-        self.view_primary.setModel(table_model)
-        self.view_primary.clicked.connect(db_manager.find_row)
+        table_model = QSqlTableModel()
+        db_manager.initialise_model(table_model)
+
+        self.tv_themes.setModel(table_model)
+        self.tv_themes.clicked.connect(db_manager.find_row)
 
         # Create a window to display the database viewer and modifier
         # dlg = QDialog(self)
@@ -35,7 +38,7 @@ class ThemeTable(ThemeTable_form, ThemeTable_base):
         # layout_database_window.addWidget(button_add_row)
 
         # button_del_row = QPushButton("Delete a row")
-        self.button_del_row.clicked.connect(lambda: table_model.removeRow(self.view_primary.currentIndex().row()))
+        self.button_del_row.clicked.connect(lambda: table_model.removeRow(self.tv_themes.currentIndex().row()))
         # layout_database_window.addWidget(button_del_row)
 
         # button_done = QPushButton("Done")

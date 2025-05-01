@@ -188,12 +188,14 @@ class DbManager():
 
     def initialise_model(self, model):
         self.logger.debug("DbManager::initialise_model - Entered method")
-        model.setTable('tennismen')
+        model.setTable('themes')
         model.setEditStrategy(QSqlTableModel.OnFieldChange)
         model.select()
-        model.setHeaderData(0, Qt.Horizontal, "ID")
-        model.setHeaderData(1, Qt.Horizontal, "First name")
-        model.setHeaderData(2, Qt.Horizontal, "Last name")
+        model.setHeaderData(0, Qt.Horizontal, "id")
+        model.setHeaderData(1, Qt.Horizontal, "name")
+        model.setHeaderData(2, Qt.Horizontal, "about")
+        model.setHeaderData(3, Qt.Horizontal, "nameIndex")
+        model.setHeaderData(4, Qt.Horizontal, "date")
         self.logger.debug("DbManager::initialise_model - Exited method")
 
     def create_view(self, title, model):
