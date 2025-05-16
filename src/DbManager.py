@@ -79,6 +79,7 @@ class DbManager():
                 '"id"           INTEGER NOT NULL UNIQUE,'
                 '"name"         TEXT NOT NULL,'
                 '"about"        TEXT,'
+                '"deleted"	    INTEGER NOT NULL DEFAULT 0,'
                 'PRIMARY KEY('
                     '"id"       AUTOINCREMENT'
                 ')'
@@ -92,8 +93,9 @@ class DbManager():
                 '"id"           INTEGER NOT NULL UNIQUE,'
                 '"name"         TEXT NOT NULL,'
                 '"about"        TEXT,'
-                '"nameIndex"    INTEGER NOT NULL, '
+                '"nameIndex"    INTEGER NOT NULL DEFAULT 0,'
                 '"date"         TEXT NOT NULL,'
+                '"deleted"	    INTEGER NOT NULL DEFAULT 0,'
                 'PRIMARY KEY('
                     '"id"       AUTOINCREMENT'
                 ')'
@@ -106,6 +108,7 @@ class DbManager():
             'CREATE TABLE "unitTypes" ('
                 '"id"	        INTEGER NOT NULL UNIQUE,'
                 '"name"	        TEXT NOT NULL,'
+                '"deleted"	    INTEGER NOT NULL DEFAULT 0,'
                 'PRIMARY KEY('
                     '"id"       AUTOINCREMENT'
                 ')'
@@ -119,8 +122,9 @@ class DbManager():
                 '"id"	        INTEGER NOT NULL UNIQUE,'
                 '"name"	        TEXT NOT NULL,'
                 '"about"        TEXT,'
-                '"nameIndex"	INTEGER NOT NULL,'
+                '"nameIndex"	INTEGER NOT NULL DEFAULT 0,'
                 '"date"	        TEXT NOT NULL,'
+                '"deleted"	    INTEGER NOT NULL DEFAULT 0,'
                 'PRIMARY KEY('
                     '"id"       AUTOINCREMENT'
                 ')'
@@ -134,6 +138,7 @@ class DbManager():
                 '"id"	        INTEGER NOT NULL UNIQUE,'
                 '"name"	        TEXT NOT NULL,'
                 '"about"	    TEXT,'
+                '"deleted"	    INTEGER NOT NULL DEFAULT 0,'
                 'PRIMARY KEY('
                     '"id"       AUTOINCREMENT'
                 ')'
@@ -151,6 +156,7 @@ class DbManager():
                 '"value"	    REAL NOT NULL,'
                 '"unitTypeId"	INTEGER NOT NULL,'
                 '"sign"	        INTEGER NOT NULL,'
+                '"deleted"	    INTEGER NOT NULL DEFAULT 0,'
                 'PRIMARY KEY('
                     '"id"       AUTOINCREMENT'
                 '),'
@@ -171,6 +177,7 @@ class DbManager():
                 '"value"	    REAL NOT NULL,'
                 '"unitTypeId"	INTEGER NOT NULL,'
                 '"sign"	        INTEGER NOT NULL,'
+                '"deleted"	    INTEGER NOT NULL DEFAULT 0,'
                 'PRIMARY KEY('
                     '"id"       AUTOINCREMENT'
                 '),'
@@ -199,11 +206,6 @@ class DbManager():
         # print ("Model row number: " + str(model.rowCount()))
         ret = model.insertRows(model.rowCount(), 1)
         # print ("Model insert state: " + str(ret))
-        self.logger.debug("DbManager::add_row - Exited method")
-
-    def find_row(self, i):
-        self.logger.debug("DbManager::add_row - Entered method")
-        self.delrow = i.row()
         self.logger.debug("DbManager::add_row - Exited method")
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
-from PyQt5.QtSql import QSqlTableModel
+from PyQt5.QtSql import QSqlTableModel, QSqlQuery
 from PyQt5.uic import loadUiType
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QModelIndex
 
 
 from io import StringIO
@@ -20,15 +20,15 @@ class UserView(UserView_form, UserView_base):
 
         self.setWindowTitle("Темы и измерения")
 
-        themes_model = QSqlTableModel()
-        self.initialise_themes_model(themes_model)
-        self.tv_themes.setModel(themes_model)
-        self.tv_themes.clicked.connect(db_manager.find_row)
+        self.themes_model = QSqlTableModel()
+        self.themes_model_initialisation(self.themes_model)
+        self.tv_themes.setModel(self.themes_model)
+        self.tv_themes.clicked.connect(self.themes_model_select_row)
 
-        measures_model = QSqlTableModel()
-        self.initialise_measures_model(measures_model)
-        self.tv_measures.setModel(measures_model)
-        self.tv_measures.clicked.connect(db_manager.find_row)
+        self.measures_model = QSqlTableModel()
+        self.measures_model_initialisation(self.measures_model)
+        self.tv_measures.setModel(self.measures_model)
+        self.tv_measures.clicked.connect(self.measures_model_select_row)
 
         # Create a window to display the database viewer and modifier
         # dlg = QDialog(self)
@@ -55,35 +55,57 @@ class UserView(UserView_form, UserView_base):
         self.logger.debug("UserView::on_button_clicked - Database dialog terminated")
         self.logger.debug("UserView::on_button_clicked - Exited method")
 
-    def initialise_themes_model(self, model):
+    def themes_model_initialisation(self, model):
         self.logger.debug("UserView::initialise_themes_model - Entered method")
-        model.setTable('themes')
-        model.setEditStrategy(QSqlTableModel.OnFieldChange)
-        model.select()
-        model.setHeaderData(0, Qt.Horizontal, "id")
-        model.setHeaderData(1, Qt.Horizontal, "name")
-        model.setHeaderData(2, Qt.Horizontal, "about")
-        model.setHeaderData(3, Qt.Horizontal, "nameIndex")
-        model.setHeaderData(4, Qt.Horizontal, "date")
+        self.themes_model.setQuery(QSqlQuery('SELECT id, name, about FROM themes WHERE deleted == 0'))
+        self.themes_model.select()
+        self.themes_model.setHeaderData(1, Qt.Horizontal, "id")
+        self.themes_model.setHeaderData(1, Qt.Horizontal, "name")
+        self.themes_model.setHeaderData(2, Qt.Horizontal, "about")
         self.logger.debug("UserView::initialise_themes_model - Exited method")
 
-    def initialise_measures_model(self, model):
+    def themes_model_select_row(self, index):
+        theme_id = index.model().data(index.model().index(index.row(), 0))
+        self.measures_model.setQuery(self.measures_model_query(theme_id))
+        self.measures_model.select()
+        self.measures_model.setHeaderData(0, Qt.Horizontal, "name")
+        self.measures_model.setHeaderData(1, Qt.Horizontal, "date")
+        self.measures_model.setHeaderData(2, Qt.Horizontal, "value")
+        self.measures_model.setHeaderData(3, Qt.Horizontal, "unit")
+
+    def measures_model_query(self, theme_id):
+        return QSqlQuery(f'SELECT '
+                            f'sl.name,'
+                            f'm.date,'
+                            f'm.value,'
+                            f'ut.name '
+                         f'FROM '
+                            f'measures AS m '
+                                f'LEFT JOIN souls AS sl ON m.soulId == sl.id '
+                                f'LEFT JOIN unitTypes AS ut ON m.unitTypeId == ut.id '
+                         f'WHERE '
+                            f'themeId == {theme_id} AND deleted == 0')
+
+    def measures_model_initialisation(self, model):
         self.logger.debug("UserView::initialise_measures_model - Entered method")
-        model.setTable('measures')
-        model.setEditStrategy(QSqlTableModel.OnFieldChange)
-        model.select()
-        model.setHeaderData(0, Qt.Horizontal, "id")
-        model.setHeaderData(1, Qt.Horizontal, "soulId")
-        model.setHeaderData(2, Qt.Horizontal, "themeId")
-        model.setHeaderData(3, Qt.Horizontal, "date")
-        model.setHeaderData(4, Qt.Horizontal, "value")
-        model.setHeaderData(5, Qt.Horizontal, "unitTypeId")
-        model.setHeaderData(6, Qt.Horizontal, "sign")
+        self.measures_model.setQuery(self.measures_model_query(-1))
+        self.measures_model.select()
+        self.measures_model.setHeaderData(0, Qt.Horizontal, "name")
+        self.measures_model.setHeaderData(1, Qt.Horizontal, "date")
+        self.measures_model.setHeaderData(2, Qt.Horizontal, "value")
+        self.measures_model.setHeaderData(3, Qt.Horizontal, "unit")
         self.logger.debug("UserView::initialise_measures_model - Exited method")
+
+    def measures_model_select_row(self, i):
+        self.logger.debug("DbManager::add_row - Entered method")
+        self.delrow = i.row()
+        self.logger.debug("DbManager::add_row - Exited method")
 
     def exit_from_window(self):
         self.main_window = UserView()
         self.main_window.showMaximized()
+        self.logger.debug("main - App terminated")
+        self.logger.debug("main - Exited function")
         self.close()
 
 

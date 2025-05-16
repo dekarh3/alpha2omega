@@ -15,10 +15,18 @@ UserView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTableView" name="tv_themes"/>
+    <widget class="QTableView" name="tv_themes">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+    </widget>
    </item>
    <item>
-    <widget class="QTableView" name="tv_measures"/>
+    <widget class="QTableView" name="tv_measures">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="button_add_row">
