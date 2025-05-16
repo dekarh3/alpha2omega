@@ -21,12 +21,13 @@ class UserView(UserView_form, UserView_base):
         self.setWindowTitle("Темы и измерения")
 
         self.themes_model = QSqlTableModel()
-        self.themes_model_initialisation(self.themes_model)
+        self.themes_model_initialisation()
         self.tv_themes.setModel(self.themes_model)
         self.tv_themes.clicked.connect(self.themes_model_select_row)
+        self.theme_id = -1
 
         self.measures_model = QSqlTableModel()
-        self.measures_model_initialisation(self.measures_model)
+        self.measures_model_refreshing()
         self.tv_measures.setModel(self.measures_model)
         self.tv_measures.clicked.connect(self.measures_model_select_row)
 
@@ -55,7 +56,7 @@ class UserView(UserView_form, UserView_base):
         self.logger.debug("UserView::on_button_clicked - Database dialog terminated")
         self.logger.debug("UserView::on_button_clicked - Exited method")
 
-    def themes_model_initialisation(self, model):
+    def themes_model_initialisation(self):
         self.logger.debug("UserView::initialise_themes_model - Entered method")
         self.themes_model.setQuery(QSqlQuery('SELECT id, name, about FROM themes WHERE deleted == 0'))
         self.themes_model.select()
@@ -65,13 +66,8 @@ class UserView(UserView_form, UserView_base):
         self.logger.debug("UserView::initialise_themes_model - Exited method")
 
     def themes_model_select_row(self, index):
-        theme_id = index.model().data(index.model().index(index.row(), 0))
-        self.measures_model.setQuery(self.measures_model_query(theme_id))
-        self.measures_model.select()
-        self.measures_model.setHeaderData(0, Qt.Horizontal, "name")
-        self.measures_model.setHeaderData(1, Qt.Horizontal, "date")
-        self.measures_model.setHeaderData(2, Qt.Horizontal, "value")
-        self.measures_model.setHeaderData(3, Qt.Horizontal, "unit")
+        self.theme_id = index.model().data(index.model().index(index.row(), 0))
+        self.measures_model_refreshing()
 
     def measures_model_query(self, theme_id):
         return QSqlQuery(f'SELECT '
@@ -84,11 +80,11 @@ class UserView(UserView_form, UserView_base):
                                 f'LEFT JOIN souls AS sl ON m.soulId == sl.id '
                                 f'LEFT JOIN unitTypes AS ut ON m.unitTypeId == ut.id '
                          f'WHERE '
-                            f'themeId == {theme_id} AND deleted == 0')
+                            f'm.themeId == {theme_id} AND m.deleted == 0')
 
-    def measures_model_initialisation(self, model):
+    def measures_model_refreshing(self):
         self.logger.debug("UserView::initialise_measures_model - Entered method")
-        self.measures_model.setQuery(self.measures_model_query(-1))
+        self.measures_model.setQuery(self.measures_model_query(self.theme_id))
         self.measures_model.select()
         self.measures_model.setHeaderData(0, Qt.Horizontal, "name")
         self.measures_model.setHeaderData(1, Qt.Horizontal, "date")
