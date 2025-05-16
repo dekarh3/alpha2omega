@@ -1,4 +1,4 @@
-ThemeTable_ui = '''<?xml version="1.0" encoding="UTF-8"?>
+UserView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>dlg</class>
  <widget class="QWidget" name="dlg">
@@ -6,14 +6,17 @@ ThemeTable_ui = '''<?xml version="1.0" encoding="UTF-8"?>
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>387</width>
-    <height>587</height>
+    <width>423</width>
+    <height>627</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTableView" name="tv_themes"/>
+   </item>
    <item>
     <widget class="QTableView" name="tv_measures"/>
    </item>
@@ -40,9 +43,6 @@ ThemeTable_ui = '''<?xml version="1.0" encoding="UTF-8"?>
    </item>
    <item>
     <widget class="QTableView" name="tv_souls"/>
-   </item>
-   <item>
-    <widget class="QTableView" name="tv_themes"/>
    </item>
    <item>
     <widget class="QTableView" name="tv_unit_types"/>

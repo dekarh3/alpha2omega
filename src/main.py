@@ -29,7 +29,7 @@ import sys
 
 from src.logger import logger, logger_output_file_path, app_folder
 from src.DbManager import DbManager
-from src.ThemeTable.ThemeTable import ThemeTable
+from src.UserView.UserView import UserView
 
 def main():
     # Define path reference: app folder is the reference for the device
@@ -42,7 +42,7 @@ def main():
 
     db_manager = DbManager('QSQLITE', 'alpa2omega.db', app_folder, logger) #, app_folder)
 
-    theme_table = ThemeTable(db_manager, logger)
+    theme_table = UserView(db_manager, logger)
     theme_table.show()
 
     logger.debug("main - App started")
