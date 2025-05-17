@@ -31,6 +31,11 @@ included = true
 is_directory = false
 
 [[Application.Package.Content]]
+name = "hide.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content]]
 name = "logger.py"
 included = true
 is_directory = false
@@ -41,37 +46,32 @@ included = true
 is_directory = false
 
 [[Application.Package.Content]]
-name = "main_window"
-included = false
-is_directory = true
-[[Application.Package.Content.Content]]
-name = "__init__.py"
-included = false
-is_directory = false
-
-[[Application.Package.Content.Content]]
-name = "main_window.py"
-included = false
-is_directory = false
-
-
-[[Application.Package.Content]]
-name = "ThemeTable"
-included = true
-is_directory = true
-[[Application.Package.Content.Content]]
-name = "__init__.py"
-included = true
-is_directory = false
-
-[[Application.Package.Content.Content]]
-name = "ThemeTable.py"
-included = true
-is_directory = false
-
-
-[[Application.Package.Content]]
 name = "uis.py"
 included = true
 is_directory = false
+
+[[Application.Package.Content]]
+name = "uis_.py"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
+name = "UserView"
+included = false
+is_directory = true
+[[Application.Package.Content.Content]]
+name = "__init__.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "UserView.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "UserView.ui"
+included = false
+is_directory = false
+
 
