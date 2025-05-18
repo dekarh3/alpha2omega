@@ -24,6 +24,8 @@ class UserView(UserView_form, UserView_base):
         self.themes_model_initialize()
         self.tv_themes.setModel(self.themes_model)
         self.tv_themes.hideColumn(0)
+        header = self.tv_themes.horizontalHeader()
+        header.setStretchLastSection(True)
         self.tv_themes.clicked.connect(self.themes_model_select_row)
         self.theme_id = -1
 
@@ -59,7 +61,7 @@ class UserView(UserView_form, UserView_base):
 
     def themes_model_initialize(self):
         self.logger.debug("UserView::initialise_themes_model - Entered method")
-        self.themes_model.setQuery(QSqlQuery('SELECT id, name, about FROM themes WHERE deleted == 0'))
+        self.themes_model.setQuery(QSqlQuery('SELECT id, oneString FROM themes WHERE deleted == 0'))
         self.themes_model.select()
         self.themes_model.setHeaderData(0, Qt.Horizontal, "id")
         self.themes_model.setHeaderData(1, Qt.Horizontal, "name")

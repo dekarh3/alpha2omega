@@ -57,7 +57,7 @@ is_directory = false
 
 [[Application.Package.Content]]
 name = "UserView"
-included = false
+included = true
 is_directory = true
 [[Application.Package.Content.Content]]
 name = "__init__.py"
@@ -71,7 +71,7 @@ is_directory = false
 
 [[Application.Package.Content.Content]]
 name = "UserView.ui"
-included = false
+included = true
 is_directory = false
 
 
