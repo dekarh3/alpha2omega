@@ -24,14 +24,16 @@ class UserView(UserView_form, UserView_base):
         self.themes_model_initialize()
         self.tv_themes.setModel(self.themes_model)
         self.tv_themes.hideColumn(0)
-        header = self.tv_themes.horizontalHeader()
-        header.setStretchLastSection(True)
+        header_themes = self.tv_themes.horizontalHeader()
+        header_themes.setStretchLastSection(True)
         self.tv_themes.clicked.connect(self.themes_model_select_row)
         self.theme_id = -1
 
         self.measures_model = QSqlTableModel()
         self.measures_model_refresh()
         self.tv_measures.setModel(self.measures_model)
+        header_measures = self.tv_measures.horizontalHeader()
+        header_measures.setStretchLastSection(True)
         self.tv_measures.clicked.connect(self.measures_model_select_row)
 
         # Create a window to display the database viewer and modifier
@@ -64,8 +66,8 @@ class UserView(UserView_form, UserView_base):
         self.themes_model.setQuery(QSqlQuery('SELECT id, oneString FROM themes WHERE deleted == 0'))
         self.themes_model.select()
         self.themes_model.setHeaderData(0, Qt.Horizontal, "id")
-        self.themes_model.setHeaderData(1, Qt.Horizontal, "name")
-        self.themes_model.setHeaderData(2, Qt.Horizontal, "about")
+        self.themes_model.setHeaderData(1, Qt.Horizontal, "")
+        #self.themes_model.setHeaderData(2, Qt.Horizontal, "about")
         self.logger.debug("UserView::initialise_themes_model - Exited method")
 
     def themes_model_select_row(self, index):
@@ -75,12 +77,12 @@ class UserView(UserView_form, UserView_base):
         self.logger.debug("UserView::themes_model_select_row - Exited method")
 
     def measures_model_query(self, theme_id):
-        return QSqlQuery('SELECT '
-                            'm.id,'
-                            'sl.name,'
-                            'm.date,'
-                            'm.value,'
-                            'ut.name '
+        return QSqlQuery("SELECT "
+                            "m.id,"
+                            "sl.name || ' - ' || "
+                            "m.value || ' ' || "
+                            "ut.name || "
+                            "' (' || strftime('%d.%m %H:%M', m.date, 'unixepoch') || ')'"
                          'FROM '
                             'measures AS m '
                                 'LEFT JOIN souls AS sl ON m.soulId == sl.id '
@@ -93,10 +95,10 @@ class UserView(UserView_form, UserView_base):
         self.measures_model.setQuery(self.measures_model_query(self.theme_id))
         self.measures_model.select()
         self.measures_model.setHeaderData(0, Qt.Horizontal, "id")
-        self.measures_model.setHeaderData(1, Qt.Horizontal, "name")
-        self.measures_model.setHeaderData(2, Qt.Horizontal, "date")
-        self.measures_model.setHeaderData(3, Qt.Horizontal, "value")
-        self.measures_model.setHeaderData(4, Qt.Horizontal, "unit")
+        self.measures_model.setHeaderData(1, Qt.Horizontal, "")
+        #self.measures_model.setHeaderData(2, Qt.Horizontal, "date")
+        #self.measures_model.setHeaderData(3, Qt.Horizontal, "value")
+        #self.measures_model.setHeaderData(4, Qt.Horizontal, "unit")
         self.tv_measures.hideColumn(0)
         self.logger.debug("UserView::measures_model_refresh - Exited method")
 
