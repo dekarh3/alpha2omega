@@ -8,7 +8,7 @@ entry_point = "src.main:main"
 is_console = false
 is_bundle = false
 name = "DatabaseManagementApp"
-qmake_configuration = ""
+qmake_configuration = "android_package_source_dir=\"$$PWD/src/img\""
 script = ""
 syspath = ""
 
@@ -36,6 +36,11 @@ included = true
 is_directory = false
 
 [[Application.Package.Content]]
+name = "img_rc.py"
+included = true
+is_directory = false
+
+[[Application.Package.Content]]
 name = "logger.py"
 included = true
 is_directory = false
@@ -48,11 +53,6 @@ is_directory = false
 [[Application.Package.Content]]
 name = "uis.py"
 included = true
-is_directory = false
-
-[[Application.Package.Content]]
-name = "uis_.py"
-included = false
 is_directory = false
 
 [[Application.Package.Content]]

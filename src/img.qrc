@@ -1,0 +1,28 @@
+<RCC>
+  <qresource prefix="/img">
+    <file>./img/next.png</file>
+    <file>./img/document-new.png</file>
+    <file>./img/bookmark.png</file>
+    <file>./img/properties.png</file>
+    <file>./img/delete.png</file>
+    <file>./img/redo.png</file>
+    <file>./img/previous.png</file>
+    <file>./img/cancel.png</file>
+    <file>./img/edit.png</file>
+    <file>./img/preferences.png</file>
+    <file>./img/copy.png</file>
+    <file>./img/ok.png</file>
+    <file>./img/minus.png</file>
+    <file>./img/save.png</file>
+    <file>./img/new.png</file>
+    <file>./img/user-home.png</file>
+    <file>./img/trash.png</file>
+    <file>./img/like.png</file>
+    <file>./img/bookmark-new.png</file>
+    <file>./img/home.png</file>
+    <file>./img/undo.png</file>
+    <file>./img/tag-new.png</file>
+    <file>./img/warning.png</file>
+    <file>./img/refresh.png</file>
+  </qresource>
+</RCC>

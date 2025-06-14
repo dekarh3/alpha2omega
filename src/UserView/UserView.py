@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt, QModelIndex
 
 from io import StringIO
 
-# from src.main import table_model, db_manager
+import src.img_rc
 from src.uis import UserView_ui
 
 UserView_form, UserView_base = loadUiType(StringIO(UserView_ui))
@@ -79,7 +79,8 @@ class UserView(UserView_form, UserView_base):
     def measures_model_query(self, theme_id):
         return QSqlQuery("SELECT "
                             "m.id,"
-                            "sl.name || ' - ' || "
+                            "sl.name || ' → ' || "
+                            "IIF (m.sign < 0, '-', '') ||"
                             "m.value || ' ' || "
                             "ut.name || "
                             "' (' || strftime('%d.%m %H:%M', m.date, 'unixepoch') || ')'"
