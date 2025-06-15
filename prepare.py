@@ -12,13 +12,19 @@ def pack_uis():
                 uis.write(file.replace('.ui', '_ui') + " = '''" + ui_insides + "'''\n")
                 ui_file.close()
     uis.close()
+
+    os.makedirs('./src/img',exist_ok=True)
+    for svg in os.listdir('./utils/svg'):
+        png = f'./src/img/{svg.strip().replace(".svg", ".png")}'
+        os.system(f'inkscape ./utils/svg/{svg} --export-filename="{png}" --export-type="png" --export-width=64')
+
     qrc = open('./src/img.qrc', "w")
     qrc.write(
         '<RCC>\n'
         '  <qresource prefix="/img">\n'
     )
-    for image in os.listdir('./src/img'):
-       qrc.write(f'    <file>./img/{image}</file>\n')
+    for png in os.listdir('./src/img'):
+       qrc.write(f'    <file>./img/{png}</file>\n')
     qrc.write(
         '  </qresource>\n'
         '</RCC>'
