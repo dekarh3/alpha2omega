@@ -13,10 +13,10 @@ def pack_uis():
                 ui_file.close()
     uis.close()
 
-    os.makedirs('./src/img',exist_ok=True)
-    for svg in os.listdir('./utils/svg'):
-        png = f'./src/img/{svg.strip().replace(".svg", ".png")}'
-        os.system(f'inkscape ./utils/svg/{svg} --export-filename="{png}" --export-type="png" --export-width=64')
+    # os.makedirs('./src/img',exist_ok=True)
+    # for svg in os.listdir('./utils/svg'):
+    #     png = f'./src/img/{svg.strip().replace(".svg", ".png")}'
+    #     os.system(f'inkscape ./utils/svg/{svg} --export-filename="{png}" --export-type="png" --export-width=64')
 
     qrc = open('./src/img.qrc', "w")
     qrc.write(
