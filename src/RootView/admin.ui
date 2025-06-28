@@ -1,4 +1,4 @@
-RootView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>dlg</class>
  <widget class="QWidget" name="dlg">
@@ -77,7 +77,7 @@ RootView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../img.qrc">
           <normaloff>:/img/img/trash.png</normaloff>:/img/img/trash.png</iconset>
         </property>
         <property name="iconSize">
@@ -131,7 +131,7 @@ RootView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
          <string/>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../img.qrc">
           <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
         </property>
         <property name="iconSize">
@@ -160,7 +160,7 @@ RootView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../img.qrc">
           <normaloff>:/img/img/ok.png</normaloff>:/img/img/ok.png</iconset>
         </property>
         <property name="iconSize">
@@ -189,7 +189,7 @@ RootView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../img.qrc">
           <normaloff>:/img/img/cancel.png</normaloff>:/img/img/cancel.png</iconset>
         </property>
         <property name="iconSize">
@@ -218,7 +218,7 @@ RootView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../img.qrc">
           <normaloff>:/img/img/copy.png</normaloff>:/img/img/copy.png</iconset>
         </property>
         <property name="iconSize">
@@ -247,7 +247,7 @@ RootView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="../img.qrc">
           <normaloff>:/img/img/trash.png</normaloff>:/img/img/trash.png</iconset>
         </property>
         <property name="iconSize">
@@ -392,7 +392,7 @@ RootView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
    <item>
     <widget class="QPushButton" name="button_add_row">
      <property name="text">
-      <string>Add a row</string>
+      <string>Add ++ a row</string>
      </property>
     </widget>
    </item>
@@ -418,6 +418,8 @@ RootView_ui = '''<?xml version="1.0" encoding="UTF-8"?>
    </item>
   </layout>
  </widget>
-     <connections/>
+ <resources>
+  <include location="../img.qrc"/>
+ </resources>
+ <connections/>
 </ui>
-'''

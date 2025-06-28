@@ -6,9 +6,9 @@ from datetime import datetime
 from io import StringIO
 
 import src.img_rc
-from src.uis import UserView_ui
+from src.uis import RootView_ui
 
-UserView_form, UserView_base = loadUiType(StringIO(UserView_ui))
+RootView_form, RootView_base = loadUiType(StringIO(RootView_ui))
 
 def measures_model_query(theme_id):
     return QSqlQuery("SELECT "
@@ -43,7 +43,7 @@ def themes_model_query():
                         'deleted == 0')
 
 
-class UserView(UserView_form, UserView_base):
+class RootView(RootView_form, RootView_base):
     def __init__(self, db_manager, logger):
         self.main_window = None
         self.delrow = None
@@ -51,9 +51,9 @@ class UserView(UserView_form, UserView_base):
         self.theme_id = None
         self.themes_model = None
         self.logger = logger
-        self.logger.debug("UserView::__init__ - Entered method")
+        self.logger.debug("RootView::__init__ - Entered method")
         self.logger.debug("Definition:: widget_main_window_ui created")
-        super(UserView_base, self).__init__()
+        super(RootView_base, self).__init__()
         self.setupUi(self)
 
         self.setWindowTitle("Темы и измерения")
@@ -81,13 +81,13 @@ class UserView(UserView_form, UserView_base):
 
         # Set layout and start the window
         # dlg.setLayout(layout_database_window)
-        self.logger.debug("UserView::on_button_clicked - Database dialog started")
+        self.logger.debug("RootView::on_button_clicked - Database dialog started")
         self.showMaximized()
-        self.logger.debug("UserView::on_button_clicked - Database dialog terminated")
-        self.logger.debug("UserView::on_button_clicked - Exited method")
+        self.logger.debug("RootView::on_button_clicked - Database dialog terminated")
+        self.logger.debug("RootView::on_button_clicked - Exited method")
 
     def themes_model_initialize(self):
-        self.logger.debug("UserView::initialise_themes_model - Entered method")
+        self.logger.debug("RootView::initialise_themes_model - Entered method")
         self.themes_model = QSqlTableModel()
         self.themes_model.setQuery(themes_model_query())
         self.themes_model.select()
@@ -107,10 +107,10 @@ class UserView(UserView_form, UserView_base):
         self.tbt_cancel.hide()
         self.tbt_duplicate.hide()
         self.tbt_save.hide()
-        self.logger.debug("UserView::initialise_themes_model - Exited method")
+        self.logger.debug("RootView::initialise_themes_model - Exited method")
 
     def themes_model_select_row(self, index):
-        self.logger.debug("UserView::themes_model_select_row - Exited method")
+        self.logger.debug("RootView::themes_model_select_row - Exited method")
         self.theme_id = index.model().data(index.model().index(index.row(), 0))
         self.measures_model_refresh(self.theme_id)
         selected_indexes = self.tv_themes.selectedIndexes() # Получаем индексы выделенных ячеек
@@ -126,20 +126,20 @@ class UserView(UserView_form, UserView_base):
             datetime_date.year, datetime_date.month, datetime_date.day, datetime_date.hour,
             datetime_date.minute, datetime_date.second)
         )
-        self.logger.debug("UserView::themes_model_select_row - Exited method")
+        self.logger.debug("RootView::themes_model_select_row - Exited method")
 
     def measures_model_initialize(self):
-        self.logger.debug("UserView::measures_model_initialize - Entered method")
+        self.logger.debug("RootView::measures_model_initialize - Entered method")
         self.measures_model = QSqlTableModel()
         self.tv_measures.setModel(self.measures_model)
         header_measures = self.tv_measures.horizontalHeader()
         header_measures.setStretchLastSection(True)
         self.measures_model_refresh()
         self.tv_measures.clicked.connect(self.measures_model_select_row)
-        self.logger.debug("UserView::measures_model_initialize - Exited method")
+        self.logger.debug("RootView::measures_model_initialize - Exited method")
 
     def measures_model_refresh(self, theme_id=1):
-        self.logger.debug("UserView::measures_model_refresh - Entered method")
+        self.logger.debug("RootView::measures_model_refresh - Entered method")
         self.measures_model.setQuery(measures_model_query(theme_id))
         self.measures_model.select()
         self.measures_model.setHeaderData(1, Qt.Horizontal, "")
@@ -148,15 +148,15 @@ class UserView(UserView_form, UserView_base):
         self.tv_measures.hideColumn(3)
         self.tv_measures.hideColumn(4)
         self.tv_measures.hideColumn(5)
-        self.logger.debug("UserView::measures_model_refresh - Exited method")
+        self.logger.debug("RootView::measures_model_refresh - Exited method")
 
     def measures_model_select_row(self, i):
-        self.logger.debug("UserView::measures_model_select_row - Entered method")
+        self.logger.debug("RootView::measures_model_select_row - Entered method")
         self.delrow = i.row()
-        self.logger.debug("UserView::measures_model_select_row - Entered method")
+        self.logger.debug("RootView::measures_model_select_row - Entered method")
 
     def exit_from_window(self):
-        self.main_window = UserView()
+        self.main_window = RootView()
         self.main_window.showMaximized()
         self.logger.debug("main - App terminated")
         self.logger.debug("main - Exited function")

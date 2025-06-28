@@ -36,6 +36,136 @@ included = true
 is_directory = false
 
 [[Application.Package.Content]]
+name = "img"
+included = false
+is_directory = true
+[[Application.Package.Content.Content]]
+name = "bookmark-new.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "bookmark.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "cancel.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "copy.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "delete.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "document-new.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "edit.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "home.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "like.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "minus.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "new.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "next.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "ok.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "preferences.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "previous.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "properties.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "redo.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "refresh.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "save.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "tag-new.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "trash.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "undo.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "user-home.png"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "warning.png"
+included = false
+is_directory = false
+
+
+[[Application.Package.Content]]
+name = "img.qrc"
+included = false
+is_directory = false
+
+[[Application.Package.Content]]
 name = "img_rc.py"
 included = true
 is_directory = false
@@ -51,12 +181,7 @@ included = true
 is_directory = false
 
 [[Application.Package.Content]]
-name = "uis.py"
-included = true
-is_directory = false
-
-[[Application.Package.Content]]
-name = "UserView"
+name = "RootView"
 included = true
 is_directory = true
 [[Application.Package.Content.Content]]
@@ -65,13 +190,23 @@ included = true
 is_directory = false
 
 [[Application.Package.Content.Content]]
-name = "UserView.py"
+name = "admin.ui"
+included = false
+is_directory = false
+
+[[Application.Package.Content.Content]]
+name = "RootView.py"
 included = true
 is_directory = false
 
 [[Application.Package.Content.Content]]
-name = "UserView.ui"
-included = true
+name = "user.ui"
+included = false
 is_directory = false
 
+
+[[Application.Package.Content]]
+name = "uis.py"
+included = true
+is_directory = false
 

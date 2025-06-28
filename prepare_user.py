@@ -2,15 +2,16 @@ import os
 def pack_uis():
     uis = open('./src/uis.py', "w+")
     for root, dirs, files in os.walk("./src"):
-        for file in files:
-            if file.endswith(".ui"):
-                ui_file = open(os.path.join(root, file), "r")
-                ui_insides = ''.join(ui_file.readlines()).replace('../img/', ':/img/')
-                ui_insides = ui_insides.replace('<include location="../img.qrc"/>\n','')
-                ui_insides = ui_insides.replace('<resources>\n','').replace('</resources>\n','')
-                ui_insides = ui_insides.replace(' resource="../img.qrc"', '')
-                uis.write(file.replace('.ui', '_ui') + " = '''" + ui_insides + "'''\n")
-                ui_file.close()
+        for dir in dirs:
+            for file in os.listdir(os.path.join(root, dir)):
+                if file == "user.ui":
+                    ui_file = open(os.path.join(root, dir, file), "r")
+                    ui_insides = ''.join(ui_file.readlines()).replace('../img/', ':/img/')
+                    ui_insides = ui_insides.replace('<include location="../img.qrc"/>\n','')
+                    ui_insides = ui_insides.replace('<resources>\n','').replace('</resources>\n','')
+                    ui_insides = ui_insides.replace(' resource="../img.qrc"', '')
+                    uis.write(dir + "_ui = '''" + ui_insides + "'''\n")
+                    ui_file.close()
     uis.close()
 
     # os.makedirs('./src/img',exist_ok=True)

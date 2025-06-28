@@ -6,7 +6,7 @@ import sys
 
 from src.constants import app_folder
 from src.DbManager import DbManager
-from src.UserView.UserView import UserView
+from src.RootView.RootView import RootView
 
 def main():
     try:
@@ -18,10 +18,10 @@ def main():
 
         db_manager = DbManager('QSQLITE', 'alpa2omega.db', app_folder, logger) #, app_folder)
 
-        user_view = UserView(db_manager, logger)
+        user_view = RootView(db_manager, logger)
         user_view.show()
     except Exception as e:
-        logger.exception("An error occurred: %s", e)
+        logger.error("An error occurred: %s", e)
 
     logger.debug("main - App started")
     logger.debug('sys.path:' + ' '.join(sys.path))
